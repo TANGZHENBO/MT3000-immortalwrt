@@ -1,0 +1,7 @@
+bin/
+*.img
+*.bin
+*.itb
+*.tar
+*.tar.zst
+.DS_Store
