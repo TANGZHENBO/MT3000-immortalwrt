@@ -1,0 +1,12 @@
+#!/bin/sh
+# Conservative first-boot defaults. Network and radio settings are untouched.
+uci -q set system.@system[0].hostname='ImmortalWrt-MT3000'
+uci -q set system.@system[0].zonename='Asia/Shanghai'
+uci -q set system.@system[0].timezone='CST-8'
+uci -q set luci.main.lang='zh_cn'
+if [ -d /www/luci-static/argon ]; then
+    uci -q set luci.main.mediaurlbase='/luci-static/argon'
+fi
+uci -q commit system
+uci -q commit luci
+exit 0
