@@ -28,9 +28,7 @@ make image PROFILE="glinet_gl-mt3000" PACKAGES="$PACKAGES" FILES="$ROOT_DIR/file
 
 OUT_DIR="$ROOT_DIR/bin/targets/mediatek/filogic"
 mkdir -p "$OUT_DIR"
-find "$IB_DIR/bin/targets/mediatek/filogic" -maxdepth 1 -type f \\
-  \( -name '*gl-mt3000*' -o -name 'profiles.json' -o -name 'sha256sums' \) \\
-  -exec cp -v {} "$OUT_DIR/" \;
+find "$IB_DIR/bin/targets/mediatek/filogic" -maxdepth 1 -type f \( -name '*gl-mt3000*' -o -name 'profiles.json' -o -name 'sha256sums' \) -exec cp -v {} "$OUT_DIR/" \;
 if ! compgen -G "$OUT_DIR/*gl-mt3000*sysupgrade*" > /dev/null; then
   echo "ERROR: no GL-MT3000 sysupgrade image was produced." >&2
   exit 21
