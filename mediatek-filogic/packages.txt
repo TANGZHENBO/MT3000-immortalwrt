@@ -1,0 +1,36 @@
+# ImmortalWrt 25.12.2 / aarch64_cortex-a53
+# Package names are requested from the ImageBuilder package indexes.
+# Optional feed packages can fail if they are not published for this exact release/architecture.
+
+# LuCI + Chinese
+luci
+luci-ssl
+luci-i18n-base-zh-cn
+luci-app-firewall
+luci-app-package-manager
+
+# Theme
+luci-theme-argon
+luci-app-argon-config
+
+# Proxy clients
+sing-box
+luci-app-passwall
+luci-app-openclash
+
+# VPN
+wireguard-tools
+kmod-wireguard
+luci-proto-wireguard
+openvpn-openssl
+luci-app-openvpn
+
+# Network and system tools
+luci-app-adblock
+luci-app-smartdns
+luci-app-ddns
+luci-app-sqm
+luci-app-upnp
+luci-app-nlbwmon
+luci-app-wol
+luci-app-ttyd
