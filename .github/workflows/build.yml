@@ -23,10 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install build dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y zstd xz-utils curl ca-certificates coreutils
+
       - name: Build firmware with official ImageBuilder
         env:
           IMAGEBUILDER_SHA256: e6af4f8c5db66e52c4bd5e2b629f8a617d61c6ebc94dc8c52754fa143cb4ac9a
@@ -34,24 +36,27 @@ jobs:
         run: |
           chmod +x ./mediatek-filogic/build.sh
           ./mediatek-filogic/build.sh
+
       - name: Generate checksums and build information
         run: |
           cd bin/targets/mediatek/filogic
-          sha256sum * > SHA256SUMS
+          find . -maxdepth 1 -type f ! -name 'SHA256SUMS' -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS
           cp "$GITHUB_WORKSPACE/mediatek-filogic/info.md" BUILD-INFO.md
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ImmortalWrt-MT3000-25.12.2
+          name: ImmortalWrt-GL-MT3000-25.12.2
           path: bin/targets/mediatek/filogic/*
           if-no-files-found: error
           retention-days: 14
+
       - name: Publish GitHub Release
         if: ${{ inputs.release }}
         uses: softprops/action-gh-release@v2.1.0
         with:
-          tag_name: MT3000-25.12.2-${{ github.run_number }}
-          name: ImmortalWrt MT3000 25.12.2 build ${{ github.run_number }}
+          tag_name: GL-MT3000-25.12.2-${{ github.run_number }}
+          name: GL-MT3000 ImmortalWrt 25.12.2 build ${{ github.run_number }}
           body_path: mediatek-filogic/info.md
           files: |
             bin/targets/mediatek/filogic/*gl-mt3000*
